@@ -1,3 +1,17 @@
+# Mathilda's project
+
+To install:
+
+```
+npm install
+```
+#### After creating database with sql files and running `npm install`:
+Check `config.js` to add your database credentials
+
+To run code:
+
+`nodemon index.js`
+
 # MSChallenge
  
 ## MICROSOFT ADC CHALLENGE YOUR SKILL
