@@ -1,0 +1,22 @@
+{
+  "name": "mschallenge",
+  "version": "1.0.0",
+  "description": "CONTOSO SKATE LIBRARY CHALLENGE",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ELECTRON11111/MSChallenge.git"
+  },
+  "author": "Omoniyi Opemipo Daniel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ELECTRON11111/MSChallenge/issues"
+  },
+  "homepage": "https://github.com/ELECTRON11111/MSChallenge#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
