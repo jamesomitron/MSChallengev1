@@ -1,3 +1,4 @@
+SET FOREIGN_KEY_CHECKS = 0;
 INSERT BookReturnRecords (return_ID, borrowers_ID, return_datereturned) VALUES (1, 364, CAST(N'2022-07-29T22:45:21.660' AS DateTime));
 INSERT BookReturnRecords (return_ID, borrowers_ID, return_datereturned) VALUES (2, 409, CAST(N'2021-11-12T03:58:00.830' AS DateTime));
 INSERT BookReturnRecords (return_ID, borrowers_ID, return_datereturned) VALUES (3, 385, CAST(N'2022-10-15T00:32:24.590' AS DateTime));
@@ -270,3 +271,4 @@ INSERT BookReturnRecords (return_ID, borrowers_ID, return_datereturned) VALUES (
 INSERT BookReturnRecords (return_ID, borrowers_ID, return_datereturned) VALUES (268, 324, CAST(N'2021-01-08T11:03:15.110' AS DateTime));
 INSERT BookReturnRecords (return_ID, borrowers_ID, return_datereturned) VALUES (269, 500, CAST(N'2022-11-29T00:38:03.470' AS DateTime));
 INSERT BookReturnRecords (return_ID, borrowers_ID, return_datereturned) VALUES (270, 305, CAST(N'2020-04-15T06:03:00.460' AS DateTime));
+SET FOREIGN_KEY_CHECKS = 1;

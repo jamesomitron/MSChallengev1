@@ -1,3 +1,4 @@
+SET FOREIGN_KEY_CHECKS = 0;
 INSERT BorrowersRecordDetails (details_ID, borrowers_ID, book_ID, detail_numberofcopies) VALUES (1, 364, 727, 1);
 INSERT BorrowersRecordDetails (details_ID, borrowers_ID, book_ID, detail_numberofcopies) VALUES (2, 409, 818, 1);
 INSERT BorrowersRecordDetails (details_ID, borrowers_ID, book_ID, detail_numberofcopies) VALUES (3, 385, 769, 1);
@@ -805,3 +806,4 @@ INSERT BorrowersRecordDetails (details_ID, borrowers_ID, book_ID, detail_numbero
 INSERT BorrowersRecordDetails (details_ID, borrowers_ID, book_ID, detail_numberofcopies) VALUES (798, 108, 215, 3);
 INSERT BorrowersRecordDetails (details_ID, borrowers_ID, book_ID, detail_numberofcopies) VALUES (799, 454, 262, 4);
 INSERT BorrowersRecordDetails (details_ID, borrowers_ID, book_ID, detail_numberofcopies) VALUES (800, 249, 498, 5);
+SET FOREIGN_KEY_CHECKS = 1;

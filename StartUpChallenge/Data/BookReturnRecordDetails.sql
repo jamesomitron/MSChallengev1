@@ -1,3 +1,4 @@
+SET FOREIGN_KEY_CHECKS = 0;
 INSERT BookReturnRecordDetails (detail_ID, return_ID, book_ID, detail_numberofcopies) VALUES (1, 197, 727, 2);
 INSERT BookReturnRecordDetails (detail_ID, return_ID, book_ID, detail_numberofcopies) VALUES (2, 221, 818, 1);
 INSERT BookReturnRecordDetails (detail_ID, return_ID, book_ID, detail_numberofcopies) VALUES (3, 208, 769, 2);
@@ -402,6 +403,6 @@ INSERT BookReturnRecordDetails (detail_ID, return_ID, book_ID, detail_numberofco
 INSERT BookReturnRecordDetails (detail_ID, return_ID, book_ID, detail_numberofcopies) VALUES (399, 48, 176, 2);
 INSERT BookReturnRecordDetails (detail_ID, return_ID, book_ID, detail_numberofcopies) VALUES (400, 34, 124, 1);
 
-
+SET FOREIGN_KEY_CHECKS = 1;
 
 

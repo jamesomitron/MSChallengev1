@@ -1,4 +1,4 @@
-
+SET FOREIGN_KEY_CHECKS = 0;
 INSERT BorrowersRecords (borrowers_ID, member_ID, staff_ID, borrowers_dateborrowed, borrowers_duereturndate) VALUES (1, 26, 8, CAST(N'2020-06-10T15:05:20.860' AS DateTime), CAST(N'2020-06-24T15:05:20.860' AS DateTime));
 INSERT BorrowersRecords (borrowers_ID, member_ID, staff_ID, borrowers_dateborrowed, borrowers_duereturndate) VALUES (2, 29, 9, CAST(N'2021-08-14T13:28:38.190' AS DateTime), CAST(N'2021-08-28T13:28:38.190' AS DateTime));
 INSERT BorrowersRecords (borrowers_ID, member_ID, staff_ID, borrowers_dateborrowed, borrowers_duereturndate) VALUES (3, 27, 8, CAST(N'2022-10-04T04:13:47.520' AS DateTime), CAST(N'2022-10-18T04:13:47.520' AS DateTime));
@@ -504,3 +504,4 @@ INSERT BorrowersRecords (borrowers_ID, member_ID, staff_ID, borrowers_dateborrow
 INSERT BorrowersRecords (borrowers_ID, member_ID, staff_ID, borrowers_dateborrowed, borrowers_duereturndate) VALUES (499, 23, 7, CAST(N'2020-04-04T18:25:21.600' AS DateTime), CAST(N'2020-04-18T18:25:21.600' AS DateTime));
 INSERT BorrowersRecords (borrowers_ID, member_ID, staff_ID, borrowers_dateborrowed, borrowers_duereturndate) VALUES (500, 28, 8, CAST(N'2022-11-15T00:38:03.470' AS DateTime), CAST(N'2022-11-29T00:38:03.470' AS DateTime));
 
+SET FOREIGN_KEY_CHECKS = 1;
