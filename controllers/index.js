@@ -77,6 +77,17 @@ exports.getRecord = (req, res, next) => {
     getQuery(req, res, next, "borrowersrecords", "borrowers_ID");
 }
 
+exports.getReturnedRecords = (req, res, next) => {
+    successResponse(req, res, next, "select * from bookreturnrecords");
+}
+
+exports.getSpecificReturnRecord = (req, res, next) => {
+    if (!req.params.id) {
+        return next(new AppError("No record id found, 404"));
+    }
+
+    getQuery(req, res, next, "bookreturnrecorddetails", "return_ID");
+}
 
 exports.getBorrowedRecords = (req, res, next) => {
     successResponse(req, res, next, `select * from borrowersrecords`);
@@ -105,35 +116,26 @@ exports.getBorrowedRecordsWithin30days = (req, res, next) => {
     });
 }
 
-exports.getBorrowedRecordsBetweenDates = (req, res, next) => {
-    if (!req.params.startDate && !req.params.endDate) {
-        return next(new AppError("No borrower record id found, 404"));
-    }
-    conn.query(`SELECT * FROM borrowersrecords WHERE borrowers_dateborrowed, borrowers_duereturndate= ?`, [req.params.startDate,] ,function (err, data, fields) {
-        if (err) return next(new AppError(err));
-        
-        // modify data to contain only items between date params
-        data = data.filter(item => {
-            const startDate = item.borrowers_dateborrowed;
-            const endDate = item.borrowers_duereturndate;
+// exports.getBorrowedRecordsBetweenDates = (req, res, next) => {
+//     if (!req.params.startDate && !req.params.endDate) {
+//         return next(new AppError("No borrower record id found, 404"));
+//     }
+//     const query = `SELECT * FROM borrowersrecords WHERE borrowers_dateborrowed, borrowers_duereturndate= ?`;
+//     conn.query(query, [req.params.startDate, req.params.startDate] ,function (err, data, fields) {
+//         if (err) return next(new AppError(err));
 
-            const days = timeDiff.absoluteDifference(startDate, endDate);
-            // console.log(days)
-            
-        });
-
-        res.status(200).json({
-            status: "success",
-            message: "List of borrowed records within the last 30 days",
-            length: data?.length,
-            data: data
-        });
-    });
-}
+//         res.status(200).json({
+//             status: "success",
+//             message: "List of borrowed records within the last 30 days",
+//             length: data?.length,
+//             data: data
+//         });
+//     });
+// }
 
 exports.updateBook = (req, res, next) => {
     if (!req.params.id) {
-        return next(new AppError("No todo id found", 404));
+        return next(new AppError("No book id found", 404));
     }
 
     conn.query(
@@ -143,7 +145,7 @@ exports.updateBook = (req, res, next) => {
             if (err) return next(new AppError(err, 500));
                 res.status(201).json({
                 status: "success",
-                message: "todo updated!",
+                message: "book updated!",
             });
         }
     )
@@ -152,7 +154,7 @@ exports.updateBook = (req, res, next) => {
 
 exports.deleteBook = (req, res, next) => {
     if (!req.params.id) {
-        return next(new AppError("No todo id found", 404));
+        return next(new AppError("No book id found", 404));
     }
 
     conn.query(

@@ -5,6 +5,7 @@ const router = express.Router();
 // routes
 const books = "/Books";
 const borrowed = "/Borrowed";
+const returned = "/Returned";
 
 router.route(`${books}`)
     .get(controllers.getAllBooks)
@@ -23,8 +24,8 @@ router.route(`${books}/Borrowed`)
 router.route(`${books}/Borrowed/Last30Days`)
     .get(controllers.getBorrowedRecordsWithin30days);
 
-router.route(`${books}/Borrowed/:dateFrom/:dateTo`)
-    .get(controllers.getBorrowedRecordsBetweenDates);
+// router.route(`${books}/Borrowed/:dateFrom/:dateTo`)
+//     .get(controllers.getBorrowedRecordsBetweenDates);
 
 router.route(`${books}/:id`)
     .get(controllers.getBook)
@@ -36,5 +37,12 @@ router.route(`${borrowed}`)
 
 router.route(`${borrowed}/:id`)
     .get(controllers.getRecord);
+
+
+router.route(`${returned}`)
+    .get(controllers.getReturnedRecords);
+
+router.route(`${returned}/:id`)
+    .get(controllers.getSpecificReturnRecord);
 
 module.exports = router;
