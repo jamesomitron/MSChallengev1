@@ -1,0 +1,329 @@
+openapi: 3.0.0
+info:
+  title: Challenge
+  version: '1.0'
+servers:
+  - description: Library server
+    url: 'http://localhost'
+paths:
+  '/books/{id}':
+    parameters:
+      - schema:
+          type: string
+          example: '8990'
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Get Book Info by Book ID
+      tags: []
+      operationId: get-books-bookid
+      description: Retrieve the information of the book with the matching book ID.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+    put:
+      summary: Update Book Info by Book ID
+      operationId: put-books-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+    delete:
+      summary: Delete Book Info by Book ID
+      operationId: delete-books-id
+      responses:
+        '200':
+          description: OK
+  /books:
+    parameters: []
+    get:
+      summary: Get Book Info all Books
+      tags: []
+      operationId: get-books
+      description: Retrieve the information of the book with the matching book ID.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+              examples: {}
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: author
+          description: Book Author
+        - schema:
+            type: string
+          in: query
+          name: publisher
+          description: Book Publisher
+    post:
+      summary: Create New Book
+      operationId: post-books
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+  /books/borrowed:
+    get:
+      summary: Get borrowed Books
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entry'
+      operationId: get-books-borrowed
+      parameters:
+        - schema:
+            type: string
+            format: date
+          in: query
+          name: dateFrom
+          description: From Date
+        - schema:
+            type: string
+            format: date
+          in: query
+          name: dateTo
+          description: To Date
+        - schema:
+            type: string
+          in: query
+          name: user
+          description: User who borrowed the book
+        - schema:
+            type: string
+          in: query
+          name: issuer
+          description: Librarian who issued the book
+        - schema:
+            type: string
+          in: query
+          name: bookId
+          description: Book Id
+        - schema:
+            type: number
+          in: query
+          name: duration
+          description: Last 30 days i.e. duration is 30
+  '/borrowed/{id}':
+    get:
+      summary: Get Books borrowed by Id
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entry'
+      operationId: get-borrowed-id
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    put:
+      summary: Update Books borrowed by Id
+      operationId: put-borrowed-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entry'
+    delete:
+      summary: Delete Books borrowed by Id
+      operationId: delete-borrowed-id
+      responses:
+        '200':
+          description: OK
+  /borrowed/:
+    get:
+      summary: Get Books borrowed
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Entry'
+      operationId: get-borrowed
+    parameters: []
+    post:
+      summary: Borrow Books
+      operationId: post-borrowed
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Entry'
+  '/returned/{id}':
+    get:
+      summary: Get Books Returned by id
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entry'
+      operationId: get-returned-id
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    put:
+      summary: Update Books Returned by id
+      operationId: put-returned-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entry'
+    delete:
+      summary: Delete Books Returned by id
+      operationId: delete-returned-id
+      responses:
+        '200':
+          description: OK
+  /returned:
+    get:
+      summary: Get Books returned
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Entry'
+      operationId: get-returned
+    parameters: []
+    post:
+      summary: Return books
+      operationId: post-returned
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LibaryRequest'
+components:
+  schemas:
+    Book:
+      type: object
+      x-examples:
+        Example 1:
+          id: 0
+          title: string
+          edition: string
+          author: string
+          publisher: string
+          cost: 0
+          remarks: string
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        edition:
+          type: string
+        author:
+          type: string
+        publisher:
+          type: string
+        cost:
+          type: integer
+        remarks:
+          type: string
+    LibaryRequest:
+      type: object
+      properties:
+        bookId:
+          type: integer
+        borrowedBy:
+          type: integer
+        returnDate:
+          type: string
+      x-examples:
+        Example 1:
+          bookId: 0
+          borrowedBy: 0
+          returnDate: '2019-08-24'
+    Entry:
+      type: object
+      x-examples:
+        Example 1:
+          id: 0
+          bookId: 0
+          issuer: 0
+          borrowedBy: 0
+          createdOn: '2019-08-24T14:15:22Z'
+          returnDate: '2019-08-24'
+          status: LOST
+          returnedOn: '2019-08-24T14:15:22Z'
+      properties:
+        id:
+          type: integer
+        bookId:
+          type: integer
+        issuer:
+          type: integer
+        borrowedBy:
+          type: integer
+        createdOn:
+          type: string
+          format: date-time
+        returnDate:
+          type: string
+          format: date
+        status:
+          type: string
+          enum:
+            - LOST
+            - DAMAGED
+            - OUT
+            - RETURNED
+        returnedOn:
+          type: string
+          format: date-time
