@@ -1,36 +1,40 @@
+// Express creates our server
+// cors is to allow and fredirect sources
+// Router is where our api routes will be defined
+// AppError and errorHandler are our global error handler functions
+
 const express = require('express');
+const cors = require("cors");
+const router = require("./routes");
+const AppError = require("./utils/appError");
+const errorhandler = require("./utils/errorHandler");
+const conn = require('./services/db');
 
 const app = express();
-const port = 3000;
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+// app.get("/", (req, res) => {
+//     res.json({ message: "ok" });
+// });
 
-// Route for books
-app.get('/books', (req, res) => {
-    // code to handle the request and create a new user
-    res.send("youre ib books");
-})
+// app.get("/:id", (req, res) => {
+//     const id = req.params?.id;
 
-app.post('/books', (req, res) => {
-    // code to handle the request and create a new user
-})
+//     conn.query("SELECT * FROM books")
+// })
 
+app.use(router);
 
-/* app.get('/books/:id', (req, res) => {
-    // code to handle the request and update the user with the specified id
+app.all("*", (req, res, next) => {
+    next(new AppError(`The URL ${req.originalUrl} does not exist`, 404));
 });
 
-app.put('/books/:id', (req, res) => {
-    // code to handle the request and update the user with the specified id
+app.use(errorhandler);
+
+// Configure app to listen to port 3000
+const PORT = 8080;
+
+app.listen(PORT, () => {
+    console.log(`server running on port ${PORT}`);
 });
 
-app.delete('/books/:id', (req, res) => {
-    // code to handle the request and delete the user with the specified id
-}); */
-
-  
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+module.exports = app;
