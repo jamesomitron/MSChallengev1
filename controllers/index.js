@@ -18,7 +18,7 @@ function getQuery(req, res, next, table, identifier) {
     );
 }
 
-function successResponse(req, res, next, query) {
+function handleResponse(req, res, next, query) {
     conn.query(`${query}`, function (err, data, fields) {
         if (err) return next(new AppError(err));
         res.status(200).json({
@@ -31,15 +31,15 @@ function successResponse(req, res, next, query) {
 
 exports.getAllBooks = async (req, res, next) => {
     // console.log(req);
-    successResponse(req, res, next, `select book_ID, book_title, book_edition, book_author, book_publisher from books`);
+    handleResponse(req, res, next, `select book_ID, book_title, book_edition, book_author, book_publisher from books`);
 };
 
 exports.getAllBooksByAuthor = async (req, res, next) => {
-    successResponse(req, res, next, `SELECT book_author from books`);
+    handleResponse(req, res, next, `SELECT book_author from books`);
 };
 
 exports.getAllBooksByPublisher = async (req, res, next) => {
-    successResponse(req, res, next, `SELECT book_publisher from books`);
+    handleResponse(req, res, next, `SELECT book_publisher from books`);
 };
 
 exports.createBook = (req, res, next) => {
@@ -78,7 +78,7 @@ exports.getRecord = (req, res, next) => {
 }
 
 exports.getReturnedRecords = (req, res, next) => {
-    successResponse(req, res, next, "select * from bookreturnrecords");
+    handleResponse(req, res, next, "select * from bookreturnrecords");
 }
 
 exports.getSpecificReturnRecord = (req, res, next) => {
@@ -90,7 +90,7 @@ exports.getSpecificReturnRecord = (req, res, next) => {
 }
 
 exports.getBorrowedRecords = (req, res, next) => {
-    successResponse(req, res, next, `select * from borrowersrecords`);
+    handleResponse(req, res, next, `select * from borrowersrecords`);
 }
 
 exports.getBorrowedRecordsWithin30days = (req, res, next) => {
